@@ -1,4 +1,4 @@
-package com.accounts.gql.domain.book;
+package com.books.gql.domain.book;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +27,9 @@ public class Book {
         return books.stream().filter(book -> book.getId().equals(id)).findFirst().orElse(null);
     }
 
+    public static List<Book> getAllBooks () {
+        return books;
+    }
     public String getId() {
         return id;
     }

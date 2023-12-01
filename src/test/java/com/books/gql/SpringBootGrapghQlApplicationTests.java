@@ -1,4 +1,4 @@
-package com.accounts.gql;
+package com.books.gql;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.accounts.gql.domain.book;
+package com.books.gql.domain.book;
 
 import java.util.Arrays;
 import java.util.List;
