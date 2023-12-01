@@ -1,0 +1,48 @@
+#spring:
+#    application:
+#        name: SpringBootGrapghQL
+#server:
+#  port: 8080
+#
+#logging:
+#  level:
+#    root: info
+#
+#graphql:
+#  playground:
+#    mapping: /playground
+#    endpoint: /graphql
+#    subscriptionEndpoint: /subscriptions
+#    staticPath.base: my-playground-resources-folder
+#    enabled: true
+#    pageTitle: Playground
+#    cdn:
+#      enabled: false
+#      version: latest
+#    settings:
+#      editor.cursorShape: line
+#      editor.fontFamily: "'Source Code Pro', 'Consolas', 'Inconsolata', 'Droid Sans Mono', 'Monaco', monospace"
+#      editor.fontSize: 14
+#      editor.reuseHeaders: true
+#      editor.theme: dark
+#      general.betaUpdates: false
+#      prettier.printWidth: 80
+#      prettier.tabWidth: 2
+#      prettier.useTabs: false
+#      request.credentials: omit
+#      schema.polling.enable: true
+#      schema.polling.endpointFilter: "*localhost*"
+#      schema.polling.interval: 2000
+#      schema.disableComments: true
+#      tracing.hideTracingResponse: true
+#    headers:
+#      headerFor: AllTabs
+#    tabs:
+#      - name: Example Tab
+#        query: classpath:exampleQuery.graphql
+#        headers:
+#          SomeHeader: Some value
+#        variables: classpath:variables.json
+#        responses:
+#          - classpath:exampleResponse1.json
+#          - classpath:exampleResponse2.json
