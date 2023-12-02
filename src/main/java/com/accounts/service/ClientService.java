@@ -14,7 +14,7 @@ import java.util.List;
 public class ClientService {
 
     public Client getClientByAccountId (String accountId) {
-
+        log.info("Getting getClientByAccountId : " + accountId);
         List <Client> clients = Arrays.asList(
                 new Client ("C100", "A100", "aaaa", "bbb", "cccc"),
                 new Client ("C200", "A102", "1111", "222", "333"),
