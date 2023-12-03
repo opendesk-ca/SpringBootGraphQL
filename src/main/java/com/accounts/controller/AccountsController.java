@@ -29,15 +29,6 @@ public class AccountsController {
         return bankService.getAccounts();
     }
 
-    /** Get clients with N + 1 problem
-    @SchemaMapping (typeName = "BankAccount", field = "client")
-    Client getClient (BankAccount account) {
-        log.info("Getting client for " + account.getId());
-        return clientService.getClientByAccountId(account.getId());
-    }*/
-
-
-    /** Get clients without N + 1 problem **/
     @BatchMapping( field = "client")
     Map<BankAccount, Client> getClient (List<BankAccount> accounts){
         log.info("Getting client for Accounts : " + accounts.size());
