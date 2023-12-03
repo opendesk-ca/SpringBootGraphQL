@@ -3,7 +3,7 @@ enum Currency {
     #Euro
     EUR,
     # Canadian Dollar
-    CAD
+    CAD,
     # United States Dollar
     USD
 }

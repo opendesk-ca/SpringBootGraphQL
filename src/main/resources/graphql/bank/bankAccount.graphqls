@@ -1,6 +1,14 @@
-type BankAccount {
+type BankAccountType {
     id: ID
-    client: Client
+    client: ClientType
+    currency: Currency
+    balance: Float
+    status: String
+}
+
+input BankAccountInput {
+    id: ID
+    client: ClientInput
     currency: Currency
     balance: Float
     status: String

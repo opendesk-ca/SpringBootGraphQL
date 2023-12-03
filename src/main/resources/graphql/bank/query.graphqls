@@ -1,3 +1,7 @@
 type Query {
-    accounts: [BankAccount]
+    accounts: [BankAccountType]
+}
+
+type Mutation {
+    addAccount(account: BankAccountInput): BankAccountType
 }
