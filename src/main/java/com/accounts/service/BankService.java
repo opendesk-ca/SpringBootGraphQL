@@ -1,12 +1,12 @@
 package com.accounts.service;
 
 import com.accounts.domain.BankAccount;
-import com.accounts.domain.Currency;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Comparator;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 @Service
 @Slf4j
