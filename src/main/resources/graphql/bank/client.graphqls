@@ -1,5 +1,5 @@
 input ClientInput {
-    id: ID
+#    id: ID
     firstName: String
     middleName: String
     lastName: String

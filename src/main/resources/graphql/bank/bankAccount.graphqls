@@ -7,9 +7,10 @@ type BankAccountType {
 }
 
 input BankAccountInput {
-    id: ID
+#    id: ID
     client: ClientInput
     currency: Currency
     balance: Float
     status: String
 }
+
