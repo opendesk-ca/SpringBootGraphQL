@@ -6,10 +6,13 @@ mutation {
       firstName: "John",
       middleName: "A.",
       lastName: "Doe"
+      country: "IN"
     },
     currency: USD,
     balance: 1000.50,
-    status: "Active"
+    status: "Active",
+    accountCreateDate: "1996-12-19T16:39:57-08:00"
+    transferLimit:100
   }) {
     id
     client {
@@ -17,25 +20,31 @@ mutation {
       firstName
       middleName
       lastName
+      country
     }
     currency
     balance
     status
+    accountCreateDate
+    transferLimit
   }
 }
 
 Query
 =====
 query  {
-  accounts {
+  accounts  {
     id
     currency
     balance
+    id
     status
+    accountCreateDate
     client{
       id
       firstName
       lastName
+      country
     }
   }
 }
@@ -43,15 +52,17 @@ query  {
 Query- Params
 =============
 query  {
-  accountsById (accountId : 1) {
+  accountsById (accountId : 5) {
     id
     currency
     balance
     status
+    accountCreateDate
     client{
       id
       firstName
       lastName
+      country
     }
   }
 }

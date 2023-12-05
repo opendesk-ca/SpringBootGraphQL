@@ -66,6 +66,8 @@ public class AccountsController {
                 .balance(accountInput.getBalance())
                 .currency(accountInput.getCurrency())
                 .status(accountInput.getStatus())
+                .accountCreateDate(accountInput.getAccountCreateDate())
+                .transferLimit(accountInput.getTransferLimit())
                 .client(client).build();
 
         return bankAccount;
@@ -80,6 +82,7 @@ public class AccountsController {
                 .lastName(clientInput.getLastName())
                 .middleName(clientInput.getMiddleName())
                 .firstName(clientInput.getFirstName())
+                .country(clientInput.getCountry())
                 .build();
     }
 }

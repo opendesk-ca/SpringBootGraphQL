@@ -1,8 +1,10 @@
+scalar CountryCode
+
 input ClientInput {
-#    id: ID
     firstName: String
     middleName: String
     lastName: String
+    country: CountryCode
 }
 
 type ClientType {
@@ -10,4 +12,5 @@ type ClientType {
     firstName: String
     middleName: String
     lastName: String
+    country: CountryCode
 }

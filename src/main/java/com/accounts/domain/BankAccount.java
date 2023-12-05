@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,4 +17,6 @@ public class BankAccount {
     private Currency currency;
     private Float balance;
     private String status;
+    private Float transferLimit;
+    private LocalDateTime accountCreateDate;
 }
