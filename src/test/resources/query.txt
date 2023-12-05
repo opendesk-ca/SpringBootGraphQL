@@ -1,0 +1,77 @@
+Mutation
+========
+mutation {
+  addAccount(account: {
+    client: {
+      firstName: "John",
+      middleName: "A.",
+      lastName: "Doe"
+    },
+    currency: USD,
+    balance: 1000.50,
+    status: "Active"
+  }) {
+    id
+    client {
+      id
+      firstName
+      middleName
+      lastName
+    }
+    currency
+    balance
+    status
+  }
+}
+
+Query
+=====
+query  {
+  accounts {
+    id
+    currency
+    balance
+    status
+    client{
+      id
+      firstName
+      lastName
+    }
+  }
+}
+
+Query- Params
+=============
+query  {
+  accountsById (accountId : 1) {
+    id
+    currency
+    balance
+    status
+    client{
+      id
+      firstName
+      lastName
+    }
+  }
+}
+
+Query- Alias
+============
+query  {
+  AccountInfo: accountsById (accountId: 1) {
+    id
+    currency
+    balance
+    status
+  }
+
+  ClientInfo: accountsById (accountId: 1) {
+
+    client{
+      id
+      firstName
+      lastName
+    }
+  }
+}

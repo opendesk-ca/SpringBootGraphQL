@@ -28,6 +28,12 @@ public class AccountsController {
         return bankService.getAccounts();
     }
 
+    @QueryMapping
+    Optional<BankAccount> accountsById (@Argument("accountId")  Integer accountId){
+        log.info("Getting Accounts ");
+        return bankService.getAccounts(accountId);
+    }
+
     @BatchMapping( field = "client", typeName = "BankAccountType" )
     Map<BankAccount, Client> getClient (List<BankAccount> accounts){
         log.info("Getting client for Accounts : " + accounts.size());
@@ -78,42 +84,3 @@ public class AccountsController {
     }
 }
 
-/*
-mutation {
-  addAccount(account: {
-    client: {
-      firstName: "John",
-      middleName: "A.",
-      lastName: "Doe"
-    },
-    currency: USD,
-    balance: 1000.50,
-    status: "Active"
-  }) {
-    id
-    client {
-      id
-      firstName
-      middleName
-      lastName
-    }
-    currency
-    balance
-    status
-  }
-}
-
-query  {
-  accounts {
-    id
-    currency
-    balance
-    status
-    client{
-      id
-      firstName
-      lastName
-    }
-  }
-}
- */
