@@ -33,19 +33,3 @@ public class AccountsController {
         return clientService.getClientByAccountId(account.getId());
     }
 }
-
-/*
-query  {
-  accounts {
-    id
-    currency
-    balance
-    status
-    client{
-      id
-      firstName
-      lastName
-    }
-  }
-}
- */
