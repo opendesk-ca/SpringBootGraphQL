@@ -1,9 +1,0 @@
-# Supported currencies
-enum Currency {
-    #Euro
-    EUR,
-    # Canadian Dollar
-    CAD
-    # United States Dollar
-    USD
-}
