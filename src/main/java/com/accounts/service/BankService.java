@@ -18,10 +18,15 @@ public class BankService {
             new BankAccount("A102", "C300", Currency.CAD, 333.00f, "I"),
             new BankAccount("A103", "C400", Currency.EUR, 4000.00f, "A")
     );
-    private static List <Client> clients = Arrays.asList(
-            new Client ("C100", "A100", "aaaa", "bbb", "cccc"),
-            new Client ("C200", "A102", "1111", "222", "333"),
-            new Client ("C300", "A102", "ppp", "qqq", "rrrr")
+    private static List<Client> clients = Arrays.asList(
+            new Client("C100", "A100", "Elena", "Maria", "Gonzalez"),
+            new Client("C200", "A102", "James", "Robert", "Smith"),
+            new Client("C300", "A102", "Aarav", "Kumar", "Patel"),
+            new Client("C400", "A103", "Linh", "Thi", "Nguyen"),
+            new Client("C500", "A104", "Olivia", "Grace", "Johnson"),
+            new Client("C600", "A105", "Liam", "Joseph", "Brown"),
+            new Client("C700", "A106", "Sophia", "Isabella", "Martinez"),
+            new Client("C800", "A107", "Noah", "Ethan", "Davis")
     );
 
     public List<BankAccount> getAccounts() {
