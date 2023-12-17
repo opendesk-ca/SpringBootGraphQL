@@ -29,7 +29,7 @@ public class AccountsController {
     @SchemaMapping (typeName = "BankAccount", field = "client")
     Client getClient (BankAccount account) {
         log.info("Getting client for " + account.getId());
-        return clientService.getClientByAccountId(account.getId());
+        return bankService.getClientByAccountId(account.getId());
     }*/
 
 
@@ -38,13 +38,7 @@ public class AccountsController {
     Map<BankAccount, Client> getClient (List<BankAccount> accounts){
         log.info("Getting client for Accounts : " + accounts.size());
 
-        Map<BankAccount, Client> clentsMap = new HashMap<>();
-
-        accounts.stream().forEach(act->{
-            Client aClient = bankService.getClientByAccountId(act.getId());
-            clentsMap.put(act, aClient);
-        });
-
+        Map<BankAccount, Client> clentsMap = bankService.getClients (accounts);
         return clentsMap;
     }
 }
