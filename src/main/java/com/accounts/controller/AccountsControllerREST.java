@@ -7,9 +7,7 @@ import com.accounts.domain.Client;
 import com.accounts.service.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -18,14 +16,15 @@ public class AccountsControllerREST {
     @Autowired
     private BankService bankService;
 
-    @GetMapping("/accounts")
+
+    @RequestMapping(value = "/accounts", method = RequestMethod.GET)
     public ResponseEntity<List<BankAccount>> getAllAccounts() {
         log.info("Getting all accounts");
         List<BankAccount> accounts = bankService.getAccounts();
         return ResponseEntity.ok(accounts); // Returns the list of accounts with an HTTP 200 status
     }
 
-    @GetMapping("/accounts/{accountId}/client")
+    @RequestMapping(value = "/accounts/{accountId}/client", method = RequestMethod.GET)
     public ResponseEntity<Client> getClientByAccountId(@PathVariable String accountId) {
         log.info("Getting client for account with ID: {}", accountId);
         Client client = bankService.getClientByAccountId(accountId);
