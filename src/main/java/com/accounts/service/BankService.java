@@ -36,7 +36,6 @@ public class BankService {
     }
 
     public Map<BankAccount, Client> getClients (List<BankAccount> accounts) {
-        log.info("Getting client for Accounts ");
         return accounts.stream()
                 .collect(Collectors.toMap(
                         account -> account, // Key Mapper
