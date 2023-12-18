@@ -14,6 +14,7 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @Slf4j
@@ -34,48 +35,23 @@ public class AccountsController {
 
         Map<BankAccount, Client> clentsMap = new HashMap<>();
 
-        accounts.stream().forEach(act->{
-            clentsMap.put(act, act.getClient());
-        });
+        clentsMap = accounts.stream()
+                .collect(Collectors.toMap(
+                        account -> account, // Key Mapper
+                        account -> account.getClient() // Value Mapper
+                ));
 
         return clentsMap;
     }
 
+
     @MutationMapping ()
     BankAccount addAccount (@Argument("account") BankAccountInput accountInput) {
         log.info("Saving Account : " + accountInput);
-        BankAccount saved = bankService.save(convertToDomainModel (accountInput));
+        BankAccount saved = bankService.save(accountInput);
         return saved;
     }
 
-    private BankAccount convertToDomainModel(BankAccountInput accountInput) {
-        Optional<Integer> lastAccountId = bankService.getAccounts()
-                .stream().map(a->a.getId()).max(Integer::compareTo);
-        Integer nextAccountId = lastAccountId.isPresent() ? lastAccountId.get() + 1 : 1;
-
-        Client client = convertClientInputToClient (accountInput.getClient());
-
-        BankAccount bankAccount = BankAccount.builder()
-                .id(nextAccountId)
-                .balance(accountInput.getBalance())
-                .currency(accountInput.getCurrency())
-                .status(accountInput.getStatus())
-                .client(client).build();
-
-        return bankAccount;
-    }
-
-    private Client convertClientInputToClient(ClientInput clientInput) {
-        Optional<Integer> lastClientId = bankService.getAccounts()
-                .stream().map(a->a.getClient().getId()).max(Integer::compareTo);
-        Integer nextClientId = lastClientId.isPresent() ?  lastClientId.get() + 1 : 1;
-
-        return Client.builder().id(nextClientId)
-                .lastName(clientInput.getLastName())
-                .middleName(clientInput.getMiddleName())
-                .firstName(clientInput.getFirstName())
-                .build();
-    }
 }
 
 /*
