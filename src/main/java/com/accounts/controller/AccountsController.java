@@ -2,7 +2,6 @@ package com.accounts.controller;
 
 import com.accounts.domain.Client;
 import com.accounts.entity.BankAccount;
-import com.accounts.exceptions.AccountNotFountException;
 import com.accounts.service.BankService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
