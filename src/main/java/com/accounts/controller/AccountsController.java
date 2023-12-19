@@ -33,7 +33,7 @@ public class AccountsController {
         return bankService.getBankAccountClientMap(bankAccounts);
     }
 
-    @MutationMapping ()
+    @MutationMapping
     Boolean addAccount (@Argument("account") BankAccount account) {
         log.info("Saving Account : " + account);
         bankService.save(account);

@@ -32,7 +32,20 @@ public class BankService {
         return repo.findAll();
     }
 
+    private List<Client> getClients () {
+        return clients;
+    }
+
     public Map<BankAccount, Client> getBankAccountClientMap(List<BankAccount> bankAccounts) {
+        // Collect all client IDs from the list of bank accounts
+        Set<Long> clientIds = bankAccounts.stream()
+                .map(BankAccount::getClientId)
+                .collect(Collectors.toSet());
+
+        // Fetch client for all collected IDs
+        List<Client> clients = getClients ().stream()
+                .filter(client -> clientIds.contains(client.getId()))
+                .collect(Collectors.toList());
 
         // Map each bank account to its corresponding client
         return clients.stream()
