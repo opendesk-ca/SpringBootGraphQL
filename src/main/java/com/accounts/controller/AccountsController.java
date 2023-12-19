@@ -45,4 +45,10 @@ public class AccountsController {
         log.info("Editing Account : " + account);
         return bankService.modify(account);
     }
+
+    @MutationMapping
+    Boolean deleteAccount (@Argument("id") Long accountId) {
+        log.info("Deleting Account : " + accountId);
+        return bankService.delete(accountId);
+    }
 }

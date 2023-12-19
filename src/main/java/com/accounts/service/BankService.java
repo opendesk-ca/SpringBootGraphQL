@@ -38,6 +38,14 @@ public class BankService {
         return repo.findAll();
     }
 
+    public Boolean delete(Long accountId) {
+        if (repo.findById(accountId).isPresent()){
+            repo.delete(repo.findById(accountId).get());
+            return true;
+        }
+        return false;
+    }
+
     private List<Client> getClients () {
         return clients;
     }

@@ -40,3 +40,7 @@ mutation {
         status
     }
 }
+
+mutation {
+	deleteAccount (id: 1)
+}
