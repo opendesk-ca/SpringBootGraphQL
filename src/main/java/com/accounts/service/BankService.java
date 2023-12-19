@@ -26,11 +26,18 @@ public class BankService {
     BankAccountRepo repo;
 
     public void save(BankAccount account) {
-        repo.save(account);
+        if (validAccount(account))
+            repo.save(account);
+        else
+            throw new AccountNotFountException("Account Not Found");
     }
 
     public BankAccount modify(BankAccount account) {
-        repo.save(account);
+        if (validAccount(account))
+            repo.save(account);
+        else
+            throw new AccountNotFountException("Account Not Found");
+
         return account;
     }
 
@@ -70,5 +77,10 @@ public class BankService {
                                 .orElse(null),
                         client -> client
                 ));
+    }
+
+    private boolean validAccount(BankAccount account) {
+        return getClients ().stream()
+                .filter(client -> client.getId().equals(account.getClientId())).findAny().isPresent();
     }
 }
