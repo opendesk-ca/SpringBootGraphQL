@@ -20,3 +20,23 @@ query  {
     }
   }
 }
+
+mutation {
+  editAccount(
+    account: {clientId: 102,
+      currency: USD,
+      balance: 800.0,
+      id: 1,
+      status: "Active"}
+  ) {
+        id
+        client {
+            id
+            firstName
+            lastName
+        }
+        currency
+        balance
+        status
+    }
+}

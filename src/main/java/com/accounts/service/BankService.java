@@ -2,6 +2,7 @@ package com.accounts.service;
 
 import com.accounts.entity.BankAccount;
 import com.accounts.domain.Client;
+import com.accounts.exceptions.AccountNotFountException;
 import com.accounts.repo.BankAccountRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class BankService {
 
     public void save(BankAccount account) {
         repo.save(account);
+    }
+
+    public BankAccount modify(BankAccount account) {
+        repo.save(account);
+        return account;
     }
 
     public List<BankAccount> getAccounts() {

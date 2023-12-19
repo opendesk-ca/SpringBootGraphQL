@@ -39,4 +39,10 @@ public class AccountsController {
         bankService.save(account);
         return true;
     }
+
+    @MutationMapping
+    BankAccount editAccount (@Argument("account") BankAccount account) {
+        log.info("Editing Account : " + account);
+        return bankService.modify(account);
+    }
 }

@@ -4,6 +4,7 @@ type Query {
 
 type Mutation {
     addAccount(account: BankAccountInput): Boolean
+    editAccount(account: BankAccountInput): BankAccountType
 }
 
 type BankAccountType {
@@ -15,6 +16,7 @@ type BankAccountType {
 }
 
 input BankAccountInput {
+    id: ID
     clientId: Int
     currency: Currency
     balance: Float
