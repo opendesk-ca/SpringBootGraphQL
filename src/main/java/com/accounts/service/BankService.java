@@ -1,58 +1,47 @@
 package com.accounts.service;
 
-import com.accounts.domain.BankAccount;
-import com.accounts.domain.BankAccountInput;
+import com.accounts.entity.BankAccount;
 import com.accounts.domain.Client;
-import com.accounts.domain.ClientInput;
+import com.accounts.repo.BankAccountRepo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.Optional;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 public class BankService {
 
-    private static SortedSet<BankAccount> bankAccounts = new TreeSet<>(Comparator.comparing(BankAccount::getId));
-    public SortedSet<BankAccount> getAccounts() {
-        return bankAccounts;
+    private static List<Client> clients = Arrays.asList(
+            new Client(100L,  "John", "T.", "Doe"),
+            new Client(101L, "Emma", "B.", "Smith"),
+            new Client(102L, "James", "R.", "Brown"),
+            new Client(103L, "Olivia", "S.", "Johnson"),
+            new Client(104L, "William", "K.", "Jones")
+    );
+    @Autowired
+    BankAccountRepo repo;
+
+    public void save(BankAccount account) {
+        repo.save(account);
     }
 
-    public BankAccount save(BankAccountInput accountInput) {
-        BankAccount account = convertToDomainModel (accountInput);
-        bankAccounts.add(account);
-        return account;
+    public List<BankAccount> getAccounts() {
+        return repo.findAll();
     }
 
-    private BankAccount convertToDomainModel(BankAccountInput accountInput) {
-        Optional<Integer> lastAccountId = getAccounts()
-                .stream().map(a->a.getId()).max(Integer::compareTo);
-        Integer nextAccountId = lastAccountId.isPresent() ? lastAccountId.get() + 1 : 1;
+    public Map<BankAccount, Client> getBankAccountClientMap(List<BankAccount> bankAccounts) {
 
-        Client client = convertClientInputToClient (accountInput.getClient());
-
-        BankAccount bankAccount = BankAccount.builder()
-                .id(nextAccountId)
-                .balance(accountInput.getBalance())
-                .currency(accountInput.getCurrency())
-                .status(accountInput.getStatus())
-                .client(client).build();
-
-        return bankAccount;
-    }
-
-    private Client convertClientInputToClient(ClientInput clientInput) {
-        Optional<Integer> lastClientId = getAccounts()
-                .stream().map(a->a.getClient().getId()).max(Integer::compareTo);
-        Integer nextClientId = lastClientId.isPresent() ?  lastClientId.get() + 1 : 1;
-
-        return Client.builder().id(nextClientId)
-                .lastName(clientInput.getLastName())
-                .middleName(clientInput.getMiddleName())
-                .firstName(clientInput.getFirstName())
-                .build();
+        // Map each bank account to its corresponding client
+        return clients.stream()
+                .collect(Collectors.toMap(
+                        client -> bankAccounts.stream()
+                                .filter(bankAccount -> bankAccount.getClientId().equals(client.getId()))
+                                .findFirst()
+                                .orElse(null),
+                        client -> client
+                ));
     }
 }
