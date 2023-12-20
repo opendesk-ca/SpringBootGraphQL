@@ -2,7 +2,8 @@ package com.accounts.service;
 
 import com.accounts.entity.BankAccount;
 import com.accounts.domain.Client;
-import com.accounts.exceptions.AccountNotFountException;
+
+import com.accounts.exceptions.ClientNotFountException;
 import com.accounts.repo.BankAccountRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +27,17 @@ public class BankService {
     BankAccountRepo repo;
 
     public void save(BankAccount account) {
-        if (validAccount(account))
+        if (validClient(account))
             repo.save(account);
         else
-            throw new AccountNotFountException("Account Not Found");
+            throw new ClientNotFountException("Client Not Found");
     }
 
     public BankAccount modify(BankAccount account) {
-        if (validAccount(account))
+        if (validClient(account))
             repo.save(account);
         else
-            throw new AccountNotFountException("Account Not Found");
+            throw new ClientNotFountException("Client Not Found");
 
         return account;
     }
@@ -79,7 +80,7 @@ public class BankService {
                 ));
     }
 
-    private boolean validAccount(BankAccount account) {
+    private boolean validClient(BankAccount account) {
         return getClients ().stream()
                 .filter(client -> client.getId().equals(account.getClientId())).findAny().isPresent();
     }
