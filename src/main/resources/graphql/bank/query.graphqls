@@ -4,11 +4,11 @@ scalar PositiveFloat
 
 type Query {
     accounts: [BankAccountType]
-    accountsById (accountId : ID): BankAccountType
+    accountById (accountId : ID): BankAccountType
 }
 
 type Mutation {
-    addAccount(account: BankAccountInput): BankAccountType
+    addAccount(account: BankAccountInput): Boolean
 }
 
 type BankAccountType {
@@ -16,26 +16,19 @@ type BankAccountType {
     client: ClientType
     currency: Currency
     balance: Float
-    transferLimit:  PositiveFloat
     status: String
+    transferLimit:  PositiveFloat
     accountCreateDate: String
 }
 
 input BankAccountInput {
-    #    id: ID
-    client: ClientInput
+    id: ID
+    clientId: Int
     currency: Currency
     balance: Float
-    transferLimit:  PositiveFloat
     status: String
+    transferLimit:  PositiveFloat
     accountCreateDate: DateTime
-}
-
-input ClientInput {
-    firstName: String
-    middleName: String
-    lastName: String
-    country: CountryCode
 }
 
 type ClientType {

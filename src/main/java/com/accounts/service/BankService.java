@@ -1,7 +1,8 @@
 package com.accounts.service;
 
-import com.accounts.domain.BankAccount;
+
 import com.accounts.domain.Client;
+import com.accounts.entity.BankAccount;
 import com.accounts.exceptions.AccountNotFountException;
 import com.accounts.exceptions.ClientNotFountException;
 import com.accounts.repo.BankAccountRepo;
