@@ -32,6 +32,9 @@ public class BankAccount {
     @Column
     private String status;
 
+    @Column
     private Float transferLimit;
+
+    @Column
     private LocalDateTime accountCreateDate;
 }

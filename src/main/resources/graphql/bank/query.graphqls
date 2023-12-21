@@ -27,8 +27,8 @@ input BankAccountInput {
     currency: Currency
     balance: Float
     status: String
-    transferLimit:  PositiveFloat
-    accountCreateDate: DateTime
+    transferLimit:  PositiveFloat  #An Float scalar that MUST be greater than zero.
+    accountCreateDate: DateTime    #accepts string values like 1996-12-19T16:39:57-08:00 and produces java.time.OffsetDateTime
 }
 
 type ClientType {
@@ -36,7 +36,7 @@ type ClientType {
     firstName: String
     middleName: String
     lastName: String
-    country: CountryCode
+    country: CountryCode            # accepts ISO Country Codes
 }
 
 # Supported currencies

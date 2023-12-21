@@ -44,16 +44,4 @@ public class AccountsController {
         bankService.save(account);
         return true;
     }
-
-    @MutationMapping
-    BankAccount editAccount (@Argument("account") BankAccount account) {
-        log.info("Editing Account : " + account);
-        return bankService.modify(account);
-    }
-
-    @MutationMapping
-    Boolean deleteAccount (@Argument("id") Long accountId) {
-        log.info("Deleting Account : " + accountId);
-        return bankService.delete(accountId);
-    }
 }

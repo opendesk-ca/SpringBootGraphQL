@@ -37,15 +37,6 @@ public class BankService {
             throw new ClientNotFountException("Client Not Found");
     }
 
-    public BankAccount modify(BankAccount account) {
-        if (validClient(account))
-            repo.save(account);
-        else
-            throw new ClientNotFountException("Client Not Found");
-
-        return account;
-    }
-
     public List<BankAccount> getAccounts() {
         return repo.findAll();
     }
@@ -55,14 +46,6 @@ public class BankService {
             return repo.findById(accountId).get();
         }
         throw new AccountNotFountException("Account Not Found");
-    }
-
-    public Boolean delete(Long accountId) {
-        if (repo.findById(accountId).isPresent()){
-            repo.delete(repo.findById(accountId).get());
-            return true;
-        }
-        return false;
     }
 
     private List<Client> getClients () {
