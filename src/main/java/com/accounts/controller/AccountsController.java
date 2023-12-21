@@ -27,6 +27,12 @@ public class AccountsController {
         return bankService.getAccounts();
     }
 
+    @QueryMapping
+    BankAccount accountById (@Argument("accountId")  Long accountId){
+        log.info("Getting Account ");
+        return bankService.accountById(accountId);
+    }
+
     @BatchMapping( field = "client", typeName = "BankAccountType" )
     public Map<BankAccount, Client> clients(List<BankAccount> bankAccounts) {
         log.info("Getting client for Accounts : " + bankAccounts.size());

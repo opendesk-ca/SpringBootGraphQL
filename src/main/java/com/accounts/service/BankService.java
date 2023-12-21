@@ -3,6 +3,7 @@ package com.accounts.service;
 import com.accounts.entity.BankAccount;
 import com.accounts.domain.Client;
 
+import com.accounts.exceptions.AccountNotFountException;
 import com.accounts.exceptions.ClientNotFountException;
 import com.accounts.repo.BankAccountRepo;
 import lombok.extern.slf4j.Slf4j;
@@ -44,6 +45,13 @@ public class BankService {
 
     public List<BankAccount> getAccounts() {
         return repo.findAll();
+    }
+
+    public BankAccount accountById(Long accountId) {
+        if (repo.findById(accountId).isPresent()) {
+            return repo.findById(accountId).get();
+        }
+        throw new AccountNotFountException("Account Not Found");
     }
 
     public Boolean delete(Long accountId) {
