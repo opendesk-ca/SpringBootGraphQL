@@ -23,67 +23,39 @@ public class AccountsController {
     BankService bankService;
 
     @QueryMapping
-    Set<BankAccount> accounts (){
+    List<BankAccount> accounts (){
         log.info("Getting Accounts ");
         return bankService.getAccounts();
     }
 
     @QueryMapping
-    Optional<BankAccount> accountsById (@Argument("accountId")  Integer accountId){
-        log.info("Getting Accounts ");
-        return bankService.getAccounts(accountId);
+    BankAccount accountById (@Argument("accountId")  Long accountId){
+        log.info("Getting Account ");
+        return bankService.accountById(accountId);
     }
 
     @BatchMapping( field = "client", typeName = "BankAccountType" )
-    Map<BankAccount, Client> getClient (List<BankAccount> accounts){
-        log.info("Getting client for Accounts : " + accounts.size());
-
-        Map<BankAccount, Client> clentsMap = new HashMap<>();
-
-        accounts.stream().forEach(act->{
-            clentsMap.put(act, act.getClient());
-        });
-
-        return clentsMap;
+    public Map<BankAccount, Client> clients(List<BankAccount> bankAccounts) {
+        log.info("Getting client for Accounts : " + bankAccounts.size());
+        return bankService.getBankAccountClientMap(bankAccounts);
     }
 
-    @MutationMapping ()
-    BankAccount addAccount (@Argument("account") BankAccountInput accountInput) {
-        log.info("Saving Account : " + accountInput);
-        BankAccount saved = bankService.save(convertToDomainModel (accountInput));
-        return saved;
+    @MutationMapping
+    Boolean addAccount (@Argument("account") BankAccount account)  {
+        log.info("Saving Account : " + account);
+        bankService.save(account);
+        return true;
     }
 
-    private BankAccount convertToDomainModel(BankAccountInput accountInput) {
-        Optional<Integer> lastAccountId = bankService.getAccounts()
-                .stream().map(a->a.getId()).max(Integer::compareTo);
-        Integer nextAccountId = lastAccountId.isPresent() ? lastAccountId.get() + 1 : 1;
-
-        Client client = convertClientInputToClient (accountInput.getClient());
-
-        BankAccount bankAccount = BankAccount.builder()
-                .id(nextAccountId)
-                .balance(accountInput.getBalance())
-                .currency(accountInput.getCurrency())
-                .status(accountInput.getStatus())
-                .accountCreateDate(accountInput.getAccountCreateDate())
-                .transferLimit(accountInput.getTransferLimit())
-                .client(client).build();
-
-        return bankAccount;
+    @MutationMapping
+    BankAccount editAccount (@Argument("account") BankAccount account) {
+        log.info("Editing Account : " + account);
+        return bankService.modify(account);
     }
 
-    private Client convertClientInputToClient(ClientInput clientInput) {
-        Optional<Integer> lastClientId = bankService.getAccounts()
-                .stream().map(a->a.getClient().getId()).max(Integer::compareTo);
-        Integer nextClientId = lastClientId.isPresent() ?  lastClientId.get() + 1 : 1;
-
-        return Client.builder().id(nextClientId)
-                .lastName(clientInput.getLastName())
-                .middleName(clientInput.getMiddleName())
-                .firstName(clientInput.getFirstName())
-                .country(clientInput.getCountry())
-                .build();
+    @MutationMapping
+    Boolean deleteAccount (@Argument("id") Long accountId) {
+        log.info("Deleting Account : " + accountId);
+        return bankService.delete(accountId);
     }
 }
-
