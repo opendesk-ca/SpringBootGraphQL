@@ -15,6 +15,7 @@ type BankAccountType {
     id: ID
     client: ClientType
     currency: Currency
+    country: CountryCode
     balance: Float
     status: String
     transferLimit:  PositiveFloat
@@ -25,6 +26,7 @@ input BankAccountInput {
     id: ID
     clientId: Int
     currency: Currency
+    country: CountryCode
     balance: Float
     status: String
     transferLimit:  PositiveFloat  #An Float scalar that MUST be greater than zero.

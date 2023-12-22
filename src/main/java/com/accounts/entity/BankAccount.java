@@ -27,6 +27,9 @@ public class BankAccount {
     private Currency currency;
 
     @Column
+    private String country;
+
+    @Column
     private Float balance;
 
     @Column
