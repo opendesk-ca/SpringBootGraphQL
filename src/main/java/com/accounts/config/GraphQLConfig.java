@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.graphql.execution.RuntimeWiringConfigurer;
 
 @Configuration
-public class GraphQlConfig {
+public class GraphQLConfig {
     @Bean
     public RuntimeWiringConfigurer DateTimeConfigurer() {
         return wiringBuilder -> wiringBuilder.scalar(ExtendedScalars.DateTime);
