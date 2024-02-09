@@ -1,0 +1,11 @@
+scalar CountryCode
+scalar DateTime
+scalar PositiveFloat
+
+type Query {
+    # Empty - Query will be extended from other files
+}
+
+type Mutation {
+    # Empty - Mutations will be extended from other files
+}
