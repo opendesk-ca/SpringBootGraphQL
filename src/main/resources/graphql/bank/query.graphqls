@@ -1,0 +1,155 @@
+type Query {
+    getAccountById(accountID: ID!): Account
+    getAllAccounts: [Account]
+}
+
+type Mutation {
+    addAccount(account: DepositAccountInput !): Boolean
+    editAccount(account: DepositAccountInput !): DepositAccount
+    deleteAccount(accountID: ID!): Boolean
+    addTransaction(transaction: DepositTransactionInput !): Boolean
+    deleteTransaction(transactionID: ID!): Boolean
+}
+
+
+interface Account {
+    accountId:ID!
+    accountType:AccountType!
+    accountNumber:String!
+    accountNumberDisplay:String!
+    nickName:String!
+    status:AccountStatus!
+    description:String!
+    lineOfBusiness:String
+    routingTransitNumber:String
+    interestRate:Float
+    interestRateType:InterestRateType
+    interestRateAsOf:String
+    currency:String
+    lastActivityDate:String
+}
+
+type DepositAccount implements Account {
+    accountId:ID!
+    accountType:AccountType!
+    accountNumber:String!
+    accountNumberDisplay:String!
+    nickName:String!
+    status:AccountStatus!
+    description:String!
+    lineOfBusiness:String
+    routingTransitNumber:String
+    interestRate:Float
+    interestRateType:InterestRateType
+    interestRateAsOf:String
+    currency:String
+    lastActivityDate:String
+    balanceAsOf: String!
+    currentBalance: Float!
+    openingDayBalance: Float!
+    availableBalance: Float!
+    annualPercentageYield: Float!
+    interestYtd: Float!
+    term: Int
+    maturityDate: String
+}
+
+interface Transaction {
+    accountId: ID!
+    transactionId: ID!
+    postedTimestamp: String!
+    transactionTimestamp: String!
+    description: String!
+    status: TransactionStatus!
+    amount: Float!
+}
+
+type DepositTransaction implements Transaction {
+    accountId: ID!
+    transactionId: ID!
+    postedTimestamp: String!
+    transactionTimestamp: String!
+    description: String!
+    status: TransactionStatus!
+    amount: Float!
+    transactionType: DepositTransactionType!
+    payee: String!
+    checkNumber: Int
+}
+
+
+input DepositAccountInput {
+    accountId: ID!
+    accountType: AccountType!
+    accountNumber: String!
+    accountNumberDisplay: String!
+    nickName: String!
+    status: AccountStatus!
+    description: String
+    lineOfBusiness: String
+    routingTransitNumber: String
+    interestRate: Float
+    interestRateType: InterestRateType
+    interestRateAsOf: String
+    currency: String
+    lastActivityDate: String
+    balanceAsOf: String!
+    currentBalance: Float!
+    openingDayBalance: Float!
+    availableBalance: Float!
+    annualPercentageYield: Float!
+    interestYtd: Float!
+    term: Int
+    maturityDate: String
+}
+
+input DepositTransactionInput {
+    accountId: ID!
+    transactionId: ID!
+    postedTimestamp: String!
+    transactionTimestamp: String!
+    description: String!
+    status: TransactionStatus!
+    amount: Float!
+    transactionType: DepositTransactionType!
+    payee: String
+    checkNumber: Int
+}
+
+
+enum AccountType {
+    CD
+    CHECKING
+    CREDITCARD
+    LOAN
+    MORTGAGE
+}
+enum AccountStatus {
+    OPEN
+    CLOSED
+    PENDINGOPEN
+    PENDINGCLOSE
+    DELINQUENT
+}
+enum InterestRateType {
+    FIXED
+    VARIABLE
+}
+enum TransactionStatus {
+    PENDING
+    POSTED
+}
+enum DepositTransactionType {
+    CHECK
+    WITHDRAWAL
+    TRANSFER
+    POSDEBIT
+    ATMWITHDRAWAL
+    BILLPAYMENT
+    FEE
+    DEPOSIT
+    ADJUSTMENT
+    INTEREST
+    DIVIDEND
+    DIRECTDEPOSIT
+}
