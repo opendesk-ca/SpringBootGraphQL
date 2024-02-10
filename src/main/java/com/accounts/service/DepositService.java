@@ -11,8 +11,6 @@ import java.util.List;
 @Service
 @Slf4j
 public class DepositService {
-
-
     @Autowired
     DepositAccountRepo repo;
 
@@ -40,5 +38,4 @@ public class DepositService {
         }
         return false;
     }
-
 }

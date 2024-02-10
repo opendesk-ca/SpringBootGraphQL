@@ -15,21 +15,6 @@ import java.util.List;
 @Slf4j
 public class AccountsController {
 
-    /*
-    extend type Query {
-    getAccountById(accountID: ID!): Account
-    getAllAccounts: [Account]
-}
-
-extend type Mutation {
-    addAccount(account: DepositAccountInput!): Boolean
-    editAccount(account: DepositAccountInput!): DepositAccount
-    deleteAccount(accountID: ID!): Boolean
-}
-
-     */
-
-
     @Autowired
     DepositService depositService;
 
@@ -40,22 +25,10 @@ extend type Mutation {
     }
 
     @QueryMapping
-    public DepositAccount getAccountById (@Argument("accountId")  Long accountId){
+    public DepositAccount getAccountById (@Argument("accountID")  Long accountID){
         log.info("Getting Account ");
-        return depositService.accountById(accountId);
+        return depositService.accountById(accountID);
     }
-
-/*    @BatchMapping( field = "client", typeName = "BankAccount" )
-    public Map<DepositAccount, Client> clients(List<DepositAccount> depositAccounts) {
-        log.info("Getting client for Accounts : " + depositAccounts);
-        return depositService.getAccountClientMap(depositAccounts);
-    }*/
-
-  /*  @BatchMapping( field = "branch", typeName = "BankAccount" )
-    public Map<DepositAccount, Branch> branches(List<DepositAccount> depositAccounts) {
-        log.info("Getting branch for Accounts : " + depositAccounts);
-        return depositService.getAccountBranchMap(depositAccounts);
-    }*/
 
     @MutationMapping
     public Boolean addAccount (@Argument("account") DepositAccount account)  {
@@ -71,8 +44,8 @@ extend type Mutation {
     }
 
     @MutationMapping
-    public Boolean deleteAccount (@Argument("id") Long accountId) {
-        log.info("Deleting Account : " + accountId);
-        return depositService.delete(accountId);
+    public Boolean deleteAccount (@Argument("accountID") Long accountID) {
+        log.info("Deleting Account : " + accountID);
+        return depositService.delete(accountID);
     }
 }

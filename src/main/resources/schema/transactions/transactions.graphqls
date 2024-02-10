@@ -7,8 +7,8 @@ extend type Mutation {
 }
 
 interface Transaction {
-    accountId: ID!
     transactionId: ID!
+    account: Account!
     postedTimestamp: DateTime!
     transactionTimestamp: DateTime!
     description: String!
@@ -17,7 +17,7 @@ interface Transaction {
 }
 
 type DepositTransaction implements Transaction {
-    accountId: ID!
+    account: DepositAccount!
     transactionId: ID!
     postedTimestamp: DateTime!
     transactionTimestamp: DateTime!
