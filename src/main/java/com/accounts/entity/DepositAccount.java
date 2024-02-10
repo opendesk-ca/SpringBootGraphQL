@@ -2,6 +2,7 @@ package com.accounts.entity;
 
 import com.accounts.domain.AccountStatus;
 import com.accounts.domain.AccountType;
+import com.accounts.domain.DateTimeConverter;
 import com.accounts.domain.InterestRateType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 
 @NoArgsConstructor
@@ -83,4 +85,20 @@ public class DepositAccount {
 
     @Column
     private  LocalDateTime  maturityDate;
+
+    public OffsetDateTime getMaturityDate() {
+        return DateTimeConverter.toOffsetDateTime(this.maturityDate);
+    }
+
+    public OffsetDateTime getBalanceAsOf() {
+        return DateTimeConverter.toOffsetDateTime(this.balanceAsOf);
+    }
+
+    public OffsetDateTime getLastActivityDate() {
+        return DateTimeConverter.toOffsetDateTime(this.lastActivityDate);
+    }
+
+    public OffsetDateTime getInterestRateAsOf() {
+        return DateTimeConverter.toOffsetDateTime(this.interestRateAsOf);
+    }
 }

@@ -1,7 +1,7 @@
 
 extend type Query {
-    getAccountById(accountID: ID!): Account
-    getAllAccounts: [Account]
+    getAccountById(accountID: ID!): DepositAccount
+    getAllAccounts: [DepositAccount]
 }
 
 extend type Mutation {

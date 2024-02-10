@@ -21,4 +21,14 @@ public class GraphQLConfig {
     public RuntimeWiringConfigurer PositiveFloatConfigurer() {
         return wiringBuilder -> wiringBuilder.scalar(ExtendedScalars.PositiveFloat);
     }
+
+    @Bean
+    public RuntimeWiringConfigurer CurrencyConfigurer() {
+        return wiringBuilder -> wiringBuilder.scalar(ExtendedScalars.Currency);
+    }
+
+    @Bean
+    public RuntimeWiringConfigurer PositiveIntConfigurer() {
+        return wiringBuilder -> wiringBuilder.scalar(ExtendedScalars.PositiveInt);
+    }
 }
