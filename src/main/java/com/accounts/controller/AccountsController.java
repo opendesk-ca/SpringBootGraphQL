@@ -25,7 +25,7 @@ public class AccountsController {
     }
 
     @QueryMapping
-    public DepositAccount getAccountById (@Argument("accountID")  Long accountID){
+    public DepositAccount getAccountById (@Argument("accountID")  String accountID){
         log.info("Getting Account ");
         return depositService.accountById(accountID);
     }
@@ -33,8 +33,7 @@ public class AccountsController {
     @MutationMapping
     public Boolean addAccount (@Argument("account") DepositAccount account)  {
         log.info("Saving Account : " + account);
-        depositService.save(account);
-        return true;
+        return depositService.save(account);
     }
 
     @MutationMapping
@@ -44,7 +43,7 @@ public class AccountsController {
     }
 
     @MutationMapping
-    public Boolean deleteAccount (@Argument("accountID") Long accountID) {
+    public Boolean deleteAccount (@Argument("accountID") String accountID) {
         log.info("Deleting Account : " + accountID);
         return depositService.delete(accountID);
     }

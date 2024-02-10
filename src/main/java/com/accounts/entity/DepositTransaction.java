@@ -13,15 +13,16 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "Transaction")
+@Table(name = "Transaction", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"accountId", "transactionId"})
+})
 public class DepositTransaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
-    private	Long	                transactionId	;
+    private	String	                transactionId	;
 
     @Column
-    private	Long	                accountId	;
+    private	String	                accountId	;
 
     @Column
     private	LocalDateTime	        postedTimestamp	;

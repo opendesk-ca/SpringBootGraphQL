@@ -14,8 +14,12 @@ public class DepositService {
     @Autowired
     DepositAccountRepo repo;
 
-    public void save(DepositAccount account) {
-        repo.save(account);
+    public Boolean save(DepositAccount account) {
+        if (!repo.findById(account.getAccountId()).isPresent()){
+            repo.save(account);
+            return true;
+        }
+        return false;
     }
 
     public DepositAccount modify(DepositAccount account) {
@@ -27,11 +31,11 @@ public class DepositService {
         return repo.findAll();
     }
 
-    public DepositAccount accountById(Long accountId) {
+    public DepositAccount accountById(String accountId) {
         return repo.findById(accountId).get();
     }
 
-    public Boolean delete(Long accountId) {
+    public Boolean delete(String accountId) {
         if (repo.findById(accountId).isPresent()){
             repo.delete(repo.findById(accountId).get());
             return true;

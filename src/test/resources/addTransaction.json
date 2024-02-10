@@ -1,0 +1,12 @@
+mutation {
+  addTransaction(transaction: {
+    accountId: "A1001",
+    transactionId: "TX1002",
+    postedTimestamp: "2024-02-15T12:00:00Z",
+    transactionTimestamp: "2024-02-15T08:00:00Z",
+    description: "Monthly salary",
+    status: POSTED,
+    amount: 3000.00,
+    transactionType: CHECK
+  })
+}

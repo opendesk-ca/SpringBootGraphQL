@@ -1,11 +1,15 @@
 package com.accounts.service;
 
+import com.accounts.entity.DepositAccount;
 import com.accounts.entity.DepositTransaction;
 import com.accounts.repo.DepositTransactionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class TransactionService {
@@ -14,51 +18,33 @@ public class TransactionService {
     DepositTransactionRepo transactionRepository;
 
     @Autowired
-    DepositService bankService;
+    DepositService service;
 
-    public void save(DepositTransaction transaction) {
-        transactionRepository.save(transaction);
+    public Boolean save(DepositTransaction transaction) {
+        if (!Objects.isNull(service.accountById(transaction.getAccountId()))  &&
+              ! transactionRepository.existsByAccountIdAndTransactionId(transaction.getAccountId(), transaction.getTransactionId())){
+            transactionRepository.save(transaction);
+            return true;
+        }
 
-       /* processTransaction (transaction.getAccountId(), TxnType.valueOf(transaction.getTransactionType()), transaction.getAmount());*/
+        return false;
     }
 
-    public List<DepositTransaction>  transactionsByAccountId(Long accountId) {
+    public List<DepositTransaction>  transactionsByAccountId(String accountId) {
             return transactionRepository.findByAccountId(accountId);
     }
 
+    public Map<DepositTransaction, DepositAccount> getTxnAccountMap(List<DepositTransaction> transactions) {
+        Map<DepositTransaction, DepositAccount> depTxnAccountMap = new HashMap<>();
 
-   /* public void processTransaction(Long accountId, TxnType txnType, float amount) throws CustomGraphQLError {
-        String result = switch (txnType) {
-            case DEPOSIT -> handleDeposit(accountId, amount);
-            case WITHDRAWAL -> handleWithdrawal(accountId, amount);
-            case TRANSFER -> handleTransfer(accountId, amount);
-            default -> handleUnknownTransaction();
-        };
-        System.out.println(result);
-    }*/
+        for (DepositTransaction txn : transactions) {
+            DepositAccount account = service.accountById(txn.getAccountId());
 
-    /*rivate String handleDeposit(Long accountId, float amount) {
+            if (!Objects.isNull(account)) {
+                depTxnAccountMap.put(txn, account);
+            }
+        }
 
-        BankAccount account = bankService.accountById(accountId);
-        account.setBalance(account.getBalance() +  amount);
-        bankService.modify(account);
-
-        return "Processing deposit of $" + amount + " to accountId ";
-    }*/
-
-    /*private String handleWithdrawal(Long accountId, float amount) {
-        BankAccount account = bankService.accountById(accountId);
-        account.setBalance(account.getBalance() - amount);
-        bankService.modify(account);
-
-        return "Processing withdrawal of $"  + " to accountId ";
-    }*/
-
-    /*private String handleTransfer(Long accountId, float amount) throws CustomGraphQLError {
-        throw new CustomGraphQLError("handleTransfer functionality is not available now");
-    }*/
-
-    /*private String handleUnknownTransaction() throws CustomGraphQLError {
-        throw new CustomGraphQLError("handleUnknownTransaction functionality is not available now");
-    }*/
+        return depTxnAccountMap;
+    }
 }

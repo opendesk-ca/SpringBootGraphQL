@@ -22,7 +22,7 @@ mutation {
         interestYtd: 10,
         term: null,
         maturityDate: null
-    },)
+    })
 }
 
 mutation {
@@ -49,7 +49,7 @@ mutation {
         interestYtd: 10,
         term: null,
         maturityDate: null
-    },)
+    })
 }
 
 mutation {

@@ -17,13 +17,15 @@ import java.time.OffsetDateTime;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "DepositAccount")
+@Table(name = "DepositAccount", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"accountId"})
+})
 public class DepositAccount {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
+    private  String accountId;
 
-    private  Long accountId;
-    
+    @Column
     private AccountType accountType;
 
     @Column
