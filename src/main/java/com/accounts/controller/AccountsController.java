@@ -15,17 +15,32 @@ import java.util.List;
 @Slf4j
 public class AccountsController {
 
+    /*
+    extend type Query {
+    getAccountById(accountID: ID!): Account
+    getAllAccounts: [Account]
+}
+
+extend type Mutation {
+    addAccount(account: DepositAccountInput!): Boolean
+    editAccount(account: DepositAccountInput!): DepositAccount
+    deleteAccount(accountID: ID!): Boolean
+}
+
+     */
+
+
     @Autowired
     DepositService depositService;
 
     @QueryMapping
-    public List<DepositAccount> accounts (){
+    public List<DepositAccount> getAllAccounts (){
         log.info("Getting Accounts ");
         return depositService.getAccounts();
     }
 
     @QueryMapping
-    public DepositAccount accountById (@Argument("accountId")  Long accountId){
+    public DepositAccount getAccountById (@Argument("accountId")  Long accountId){
         log.info("Getting Account ");
         return depositService.accountById(accountId);
     }
