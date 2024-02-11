@@ -23,7 +23,7 @@ public class TransactionController {
 
     @QueryMapping
     public List<DepositTransaction> getTransactionById (@Argument("accountId")  String accountId){
-        log.info("Getting Account ");
+        log.info("Getting Transactions ");
         return txnService.transactionsByAccountId(accountId);
     }
 
