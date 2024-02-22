@@ -47,7 +47,7 @@ public class RequestErrorInterceptor  implements WebGraphQlInterceptor {
         if (error.getMessage().contains("is not a valid 'CountryCode'")){
             errorMessage = "The Country code entered is not valid. Please provide a valid country code";
             extensionMap.put("Country Code", "Currently we only support US and Canada");
-        }else if (error.getMessage().contains("currency")){
+        }else if (error.getMessage().contains("is not a valid 'Currency'")){
             errorMessage = "Please provide a valid Currency code";
             extensionMap.put("Currency Code", "Currently we only support USD and CAD");
         }
