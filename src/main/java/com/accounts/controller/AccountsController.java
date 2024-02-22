@@ -31,7 +31,7 @@ public class AccountsController {
     }
 
     @QueryMapping
-    BankAccount accountById (@ContextValue @Argument("accountId")  Long accountId){
+    BankAccount accountById (@Argument("accountId")  Long accountId){
         log.info("Getting Account ");
         return bankService.accountById(accountId);
     }
@@ -54,7 +54,7 @@ public class AccountsController {
         return GraphQLError
                 .newError()
                 .errorType(ErrorType.BAD_REQUEST)
-                .message(ex.getMessage())
+                .message("Message from Controller exception handler : " + ex.getMessage())
                 .path(environment.getExecutionStepInfo().getPath())
                 .location(environment.getField().getSourceLocation())
                 .build();

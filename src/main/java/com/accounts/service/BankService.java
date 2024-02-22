@@ -34,7 +34,7 @@ public class BankService {
         if (validClient(account))
             repo.save(account);
         else
-            throw new ClientNotFountException("Client Not Found " + account.getClientId());
+            throw new ClientNotFountException("Client Not Found : " + account.getClientId());
     }
 
     public List<BankAccount> getAccounts() {
@@ -45,7 +45,7 @@ public class BankService {
         if (repo.findById(accountId).isPresent()) {
             return repo.findById(accountId).get();
         }
-        throw new AccountNotFountException("Account Not Found" + accountId);
+        throw new AccountNotFountException("Account Not Found : " + accountId);
     }
 
     private List<Client> getClients () {
