@@ -1,4 +1,4 @@
-package com.accounts.exceptions;
+package com.accounts.intrceptor;
 
 import graphql.GraphQLError;
 import graphql.GraphqlErrorBuilder;
