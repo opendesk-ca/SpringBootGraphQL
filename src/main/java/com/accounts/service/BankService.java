@@ -37,8 +37,8 @@ public class BankService {
             throw new ClientNotFountException("Client Not Found " + account.getClientId());
     }
 
-    public List<BankAccount> getAccounts() {
-        return repo.findAll();
+    public List<BankAccount> getAccounts(String accountStatus) {
+        return repo.findByStatus(accountStatus);
     }
 
     public BankAccount accountById(Long accountId) {

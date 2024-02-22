@@ -25,13 +25,13 @@ public class AccountsController {
     BankService bankService;
 
     @QueryMapping
-    List<BankAccount> accounts (){
+    List<BankAccount> accounts (@ContextValue String accountStatus){
         log.info("Getting Accounts ");
-        return bankService.getAccounts();
+        return bankService.getAccounts(accountStatus);
     }
 
     @QueryMapping
-    BankAccount accountById (@ContextValue @Argument("accountId")  Long accountId){
+    BankAccount accountById (@Argument("accountId")  Long accountId){
         log.info("Getting Account ");
         return bankService.accountById(accountId);
     }
