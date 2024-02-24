@@ -54,7 +54,7 @@ public class AccountsController {
         return GraphQLError
                 .newError()
                 .errorType(ErrorType.BAD_REQUEST)
-                .message("Message from Controller exception handler : " + ex.getMessage())
+                .message("Sorry, we couldn't find the requested account. Please check the account ID and try again : " + ex.getMessage())
                 .path(environment.getExecutionStepInfo().getPath())
                 .location(environment.getField().getSourceLocation())
                 .build();
