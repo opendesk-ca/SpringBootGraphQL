@@ -54,9 +54,11 @@ public class AccountsController {
         return GraphQLError
                 .newError()
                 .errorType(ErrorType.BAD_REQUEST)
-                .message("Message from Controller exception handler : " + ex.getMessage())
+                .message("The account you are trying to access does not exist : " + ex.getMessage())
                 .path(environment.getExecutionStepInfo().getPath())
                 .location(environment.getField().getSourceLocation())
                 .build();
     }
+
+
 }
