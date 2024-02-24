@@ -45,11 +45,11 @@ public class RequestErrorInterceptor  implements WebGraphQlInterceptor {
         Map<String, Object> extensionMap = new HashMap<>();
 
         if (error.getMessage().contains("is not a valid 'CountryCode'")){
-            errorMessage = "The Country code entered is not valid. Please provide a valid country code";
-            extensionMap.put("Country Code", "Currently we only support US and Canada");
+            errorMessage = "Invalid country code. Use a supported country code.";
+            extensionMap.put("Supported Country Codes", "US, CA");
         }else if (error.getMessage().contains("is not a valid 'Currency'")){
-            errorMessage = "Please provide a valid Currency code";
-            extensionMap.put("Currency Code", "Currently we only support USD and CAD");
+            errorMessage = "Invalid Currency code. Use a supported Currency code.";
+            extensionMap.put("Supported Currency Codes", "USD, CAD");
         }
 
         return GraphqlErrorBuilder.newError()
