@@ -46,10 +46,10 @@ public class RequestErrorInterceptor  implements WebGraphQlInterceptor {
 
         if (error.getMessage().contains("is not a valid 'CountryCode'")){
             errorMessage = "Invalid country code. Use a supported country code.";
-            extensionMap.put("Supported Country Codes", "US, CA");
+            extensionMap.put("Supported Country Codes", "International country codes are short alphanumeric combinations that uniquely identify countries or geographical areas around the world. ");
         }else if (error.getMessage().contains("is not a valid 'Currency'")){
             errorMessage = "Invalid Currency code. Use a supported Currency code.";
-            extensionMap.put("Supported Currency Codes", "USD, CAD");
+            extensionMap.put("Supported Currency Codes", "USD, CAD, EUR");
         }
 
         return GraphqlErrorBuilder.newError()
