@@ -54,7 +54,9 @@ public class AccountsController {
         return GraphQLError
                 .newError()
                 .errorType(ErrorType.BAD_REQUEST)
-                .message("Unable to locate the specified client. Please verify the client details and attempt your request again. : " + ex.getMessage())
+                .message("Unable to locate the specified client. " +
+                        "Please verify the client details and attempt your request again. : "
+                        + ex.getMessage())
                 .path(environment.getExecutionStepInfo().getPath())
                 .location(environment.getField().getSourceLocation())
                 .build();
