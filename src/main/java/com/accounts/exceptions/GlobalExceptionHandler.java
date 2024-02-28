@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
     Map<String, Object> extMap = new HashMap<>();
 
     @GraphQlExceptionHandler
-    public GraphQLError handle(@NonNull AccountNotFountException ex, @NonNull DataFetchingEnvironment environment) {
+    public GraphQLError handle(@NonNull AccountNotFoundException ex, @NonNull DataFetchingEnvironment environment) {
         extMap.put("errorCode", "ACCOUNT_NOT_FOUND");
         extMap.put("userMessage", "The account you are trying to access does not exist.");
         extMap.put("timestamp", Instant.now().toString());
