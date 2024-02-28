@@ -1,7 +1,7 @@
 package com.accounts.exceptions;
 
-public class ClientNotFountException extends RuntimeException {
-    public ClientNotFountException(String message) {
+public class ClientNotFoundException extends RuntimeException {
+    public ClientNotFoundException(String message) {
         super(message);
     }
 }

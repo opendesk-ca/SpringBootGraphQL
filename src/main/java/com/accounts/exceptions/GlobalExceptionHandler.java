@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @GraphQlExceptionHandler
-    public GraphQLError handle(@NonNull AccountNotFountException ex, @NonNull DataFetchingEnvironment environment) {
+    public GraphQLError handle(@NonNull AccountNotFoundException ex, @NonNull DataFetchingEnvironment environment) {
         return GraphQLError
                 .newError()
                 .errorType(ErrorType.BAD_REQUEST)

@@ -16,19 +16,18 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
-public class RequestErrorInterceptor  implements WebGraphQlInterceptor {
+public class RequestErrorInterceptor implements WebGraphQlInterceptor {
 
     @Override
     public Mono<WebGraphQlResponse> intercept(WebGraphQlRequest request, Chain chain) {
         return chain.next(request)
-                .map(this::processResponse);
+                .map (this::processResponse);
     }
 
     private WebGraphQlResponse processResponse(WebGraphQlResponse response) {
-        if (response.isValid()) {
+        if (response.isValid()){
             return response;
-        } else {
-            /** There are errors in the response - so, lets handle it*/
+        }else{
             List<GraphQLError> modifiedErrors = modifyErrors(response.getErrors());
             return response.transform(builder -> builder.errors(modifiedErrors).build());
         }
@@ -43,7 +42,6 @@ public class RequestErrorInterceptor  implements WebGraphQlInterceptor {
     private GraphQLError createValidationError(ResponseError error) {
         String errorMessage = null;
         Map<String, Object> extensionMap = new HashMap<>();
-
         if (error.getMessage().contains("is not a valid 'CountryCode'")){
             errorMessage = "Invalid country code. Use a supported country code.";
             extensionMap.put("Supported Country Codes", "International country codes are short alphanumeric combinations that uniquely identify countries or geographical areas around the world. ");
@@ -53,11 +51,11 @@ public class RequestErrorInterceptor  implements WebGraphQlInterceptor {
         }
 
         return GraphqlErrorBuilder.newError()
-        .message(errorMessage)
-        .errorType(ErrorType.BAD_REQUEST)
+                .message(errorMessage)
+                .errorType(ErrorType.BAD_REQUEST)
                 .extensions(extensionMap)
                 .locations(error.getLocations())
-        // Add more customization to the error as needed
-        .build();
+                // Add more customization to the error as needed
+                .build();
     }
 }

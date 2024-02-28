@@ -2,8 +2,8 @@ package com.accounts.controller;
 
 import com.accounts.domain.Client;
 import com.accounts.entity.BankAccount;
-import com.accounts.exceptions.AccountNotFountException;
-import com.accounts.exceptions.ClientNotFountException;
+import com.accounts.exceptions.AccountNotFoundException;
+import com.accounts.exceptions.ClientNotFoundException;
 import com.accounts.service.BankService;
 import graphql.GraphQLError;
 import graphql.schema.DataFetchingEnvironment;
@@ -50,7 +50,7 @@ public class AccountsController {
     }
 
     @GraphQlExceptionHandler
-    public GraphQLError handle(@NonNull ClientNotFountException ex, @NonNull DataFetchingEnvironment environment) {
+    public GraphQLError handle(@NonNull ClientNotFoundException ex, @NonNull DataFetchingEnvironment environment) {
         return GraphQLError
                 .newError()
                 .errorType(ErrorType.BAD_REQUEST)
