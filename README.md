@@ -1,1 +1,1 @@
-# SpringBootGraphQL
+# SpringBootGraphQL Project
