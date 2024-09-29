@@ -45,7 +45,7 @@ public class AccountsController {
     @QueryMapping
     public List<BankAccount> accounts() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        log.info("Getting Accounts for user: " + authentication.getName());
+        log.info("Is User Authenticated : " + authentication.isAuthenticated());
         return bankService.getAccounts();
     }
 
