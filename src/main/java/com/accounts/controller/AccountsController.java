@@ -37,7 +37,7 @@ public class AccountsController {
     private String systemUser;
 
     @Value ("${app.systemUser.login.password}")
-    private String password;
+    private String systemPassword;
 
     @Autowired
     private JwtUtils jwUtils;
@@ -52,7 +52,7 @@ public class AccountsController {
     @QueryMapping (name = "login")
     public AuthPayload loginQuery (@Argument String email, @Argument String password) {
         /*No authentication required as this is a public query*/
-        if (systemUser.equals(email) && password.equals(password)) {
+        if (systemUser.equals(email) && systemPassword.equals(password)) {
             AuthPayload payload = new AuthPayload(jwUtils.generateJWTToken(), new User("Login User", email, email));
             return payload;
         } else {
