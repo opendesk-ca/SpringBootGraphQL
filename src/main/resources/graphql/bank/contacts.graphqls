@@ -1,0 +1,17 @@
+# contacts.graphqls
+
+enum ContactMethod {
+    PHONE
+    EMAIL
+    OTHER
+}
+
+type Contact implements Node {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    role: String
+    email: String
+    phone: String
+    preferredContactMethod: ContactMethod
+}

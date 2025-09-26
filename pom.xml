@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.accounts.gql</groupId>
-	<artifactId>SpringBootGraphQL</artifactId>
+	<artifactId>dynamic-client-calllist</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SpringBootGraphQL</name>
-	<description>Demo project for Spring Boot GraphQL</description>
+	<name>dynamic-client-calllist</name>
+	<description>Spring Boot GraphQL Microservice for Dynamic Client Call List</description>
 
 	<properties>
 		<java.version>17</java.version>

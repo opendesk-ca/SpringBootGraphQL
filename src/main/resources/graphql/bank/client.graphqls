@@ -1,0 +1,87 @@
+# client.graphqls
+
+# Interface for extensible ranking factors
+interface RankingFactor {
+    factorName: String!
+    contributionToScore: Float!
+}
+
+# Concrete implementations of RankingFactor
+type RecencyFactor implements RankingFactor {
+    factorName: String!
+    contributionToScore: Float!
+    daysSinceLastInteraction: Int!
+}
+
+type FrequencyFactor implements RankingFactor {
+    factorName: String!
+    contributionToScore: Float!
+    numberOfInteractions: Int!
+}
+
+# Client entity
+type Client implements Node {
+    id: ID!
+    name: String!
+    industry: String
+    lastInteractionDate: String
+    interactionFrequency: Int
+    score: Float
+    rankingFactors: [RankingFactor!]!
+    contacts: [Contact!]!
+}
+
+# Call list response
+type CallList {
+    clients: [Client!]!
+    pageInfo: PageInfo!
+}
+
+# Filters & sorting inputs
+input ClientFilter {
+    industry: String
+    minScore: Float
+    maxScore: Float
+}
+
+input SortCriteria {
+    field: String!
+    direction: SortDirection!
+}
+
+# Queries
+extend type Query {
+    getClientById(id: ID!): Client
+    getCallList(
+        filters: ClientFilter
+        sort: [SortCriteria!]
+        page: PageRequest!
+    ): CallList
+}
+
+
+#query {
+#    getCallList(page: { page: 1, size: 10 }) {
+#        clients {
+#            id
+#            name
+#            score
+#            rankingFactors {
+#                factorName
+#                contributionToScore
+#                ... on RecencyFactor {
+#                    daysSinceLastInteraction
+#                }
+#                ... on FrequencyFactor {
+#                    numberOfInteractions
+#                }
+#            }
+#            contacts {
+#                firstName
+#                lastName
+#                role
+#                email
+#            }
+#        }
+#    }
+#}

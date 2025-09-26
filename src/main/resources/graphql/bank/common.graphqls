@@ -1,0 +1,36 @@
+# Common interface for all entities with identity
+interface Node {
+    id: ID!
+}
+
+# Common pagination & sorting
+enum SortDirection {
+    ASC
+    DESC
+}
+
+input PageRequest {
+    page: Int!
+    size: Int!
+}
+
+type PageInfo {
+    totalCount: Int!
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+}
+
+#type PageInfo {
+#    currentPage: Int!
+#    pageSize: Int!
+#    totalPages: Int!
+#    totalItems: Int!
+#    hasNextPage: Boolean!
+#    hasPreviousPage: Boolean!
+#}
+
+
+
+type Query {
+    #empty Query. Will extend other Queries from here.
+}
