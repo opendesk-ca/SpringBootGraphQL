@@ -1,12 +1,14 @@
 package com.accounts.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
 @AllArgsConstructor
+@Builder
 public class Client {
     private String id;
     private String name;
