@@ -9,6 +9,7 @@ import com.accounts.entity.ContactEntity;
 import com.accounts.repo.ClientRepository;
 import com.accounts.repo.ContactRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeFormatter;
@@ -28,7 +29,9 @@ public class StubDbLoader {
         this.contactRepo = contactRepo;
     }
 
+    @Cacheable("clientById")  // caches by id
     public Client findClientById(String id) {
+        log.info("Fetching Client {} from DB", id); // proves cache
         ClientEntity clientEntity = clientRepo.findById(id).orElseThrow();
         List<ContactEntity> contacts = contactRepo.findAll()
                 .stream()
@@ -50,7 +53,9 @@ public class StubDbLoader {
         return client;
     }
 
+    @Cacheable("clients")  // caches whole list
     public List<Client> getClients() {
+        log.info("Fetching all clients from DB"); // proves cache
         List<ClientEntity> clients = clientRepo.findAll();
         List<ContactEntity> contacts = contactRepo.findAll();
 
@@ -70,6 +75,7 @@ public class StubDbLoader {
     }
 
     public List<Contact> getContacts() {
+        log.info("Fetching contacts from DB");
         List<ContactEntity> contacts = contactRepo.findAll();
         List<Contact> contactList = contacts.stream().map(
                 c->Contact.builder().id(c.getId()).

@@ -23,9 +23,6 @@ import java.util.stream.Collectors;
 public class ClientController {
 
     @Autowired
-    private StubDataLoader stubDataLoader;
-
-    @Autowired
     private StubDbLoader stubDbLoader;
 
     @QueryMapping
