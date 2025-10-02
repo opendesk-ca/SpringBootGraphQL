@@ -27,6 +27,7 @@ public class ClientController {
 
     @QueryMapping
     public Client getClientById(@Argument String id) {
+        log.info("getClientById : {} ", id);
         return stubDbLoader.findClientById(id);
     }
 
